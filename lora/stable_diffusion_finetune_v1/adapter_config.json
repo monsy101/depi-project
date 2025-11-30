@@ -1,0 +1,12 @@
+{
+  "lora_rank": 16,
+  "lora_alpha": 32,
+  "target_modules": [
+    "to_k",
+    "to_q",
+    "to_v",
+    "to_out.0"
+  ],
+  "lora_dropout": 0.1,
+  "bias": "none"
+}

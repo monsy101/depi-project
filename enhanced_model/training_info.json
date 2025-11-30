@@ -1,0 +1,7 @@
+{
+  "trained_on": "combined_dataset",
+  "prompt": "diverse artistic patterns and compositions",
+  "steps": 100,
+  "images_used": 65,
+  "device": "cpu"
+}

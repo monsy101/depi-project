@@ -1,0 +1,12 @@
+{
+  "instance_prompt": "a unique artistic style",
+  "instance_data_dir": "augmented_data",
+  "output_dir": "minimal_fine_tuned_model",
+  "resolution": 512,
+  "train_batch_size": 1,
+  "gradient_accumulation_steps": 1,
+  "learning_rate": 5e-06,
+  "max_train_steps": 100,
+  "save_steps": 50,
+  "num_train_epochs": 1
+}
