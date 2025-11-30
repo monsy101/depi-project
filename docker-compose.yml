@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  fastapi-backend:
+    build: .
+    container_name: sd-fastapi
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:ro
+      - ./lora:/app/lora:ro
+      - ./outputs:/app/outputs
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: uvicorn fastapi_app:app --host 0.0.0.0 --port 8000
+
+  stable-diffusion-finetune:
+    build: .
+    container_name: sd-finetune
+    ports:
+      - "7860:7860"  # For potential web interface
+    volumes:
+      # Mount local directories for persistent storage
+      - ./models:/app/models
+      - ./lora_adapter:/app/lora_adapter
+      - ./combined_dataset:/app/combined_dataset
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash -c "echo 'Stable Diffusion Docker Environment Ready' && sleep infinity"
+
+  # Optional: Web interface service
+  gradio-interface:
+    build: .
+    container_name: sd-gradio
+    ports:
+      - "7861:7860"
+    volumes:
+      - ./models:/app/models:ro
+      - ./lora_adapter:/app/lora_adapter:ro
+      - ./outputs:/app/outputs
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: python gradio_app.py
