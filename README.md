@@ -153,11 +153,28 @@ python prepare_model.py
 
 ### Basic Usage
 
-#### 🎨 Generate Images (Web Interface)
+#### 🎨 Generate Images (Web Interface — Gradio)
 ```bash
 python gradio_app.py
 ```
 Navigate to `http://localhost:7860` and start generating!
+
+#### 🎨 Generate Images (Web Interface — Streamlit)
+```bash
+# If you haven't already, install dependencies
+pip install -r requirements.txt
+
+# Run the Streamlit interface
+streamlit run streamlit_app.py
+# or, if the streamlit command is not on PATH:
+python -m streamlit run streamlit_app.py
+```
+Navigate to `http://localhost:8501`.
+
+**Notes**
+- First launch downloads the base Stable Diffusion model (~4GB) unless you pre-download it with `python prepare_model.py`.
+- If you already ran `prepare_model.py`, the app will load the model from `./models` and start much faster.
+- If LoRA adapters exist in `lora/stable_diffusion_finetune_v1/` (or `deployment/models/stable_diffusion_finetune_v1/`), they load automatically; otherwise the base model is used.
 
 #### 🔧 Generate Images (Python API)
 ```python
