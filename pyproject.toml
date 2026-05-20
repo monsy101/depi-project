@@ -1,0 +1,2 @@
+[tool.vercel]
+entrypoint = "deployment.deployment.api.fastapi_app:app"
