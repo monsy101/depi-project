@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "main.py": {
+      "excludeFiles": "{deployment/**,lora/**,models/**,scripts/**,config/**,enhanced_model/**,enhanced_dataset/**,combined_dataset/**,original_images/**,finetuned_images/**,**/*.pt,**/*.bin,**/*.safetensors,**/*.ckpt,**/*.zip,**/*.pth,**/__pycache__/**,**/.venv/**,**/*.ipynb,streamlit_app.py,gradio_app.py,Dockerfile,docker-compose.yml,}"
+    }
+  }
+}
